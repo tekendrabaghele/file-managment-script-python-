@@ -1,10 +1,15 @@
 import os
 import shutil
+
+print('WellCome to File Management tool \n ')
 dict_extensions = {
-    'audio_extensions' : ('.mp3', '.m4a', '.wav', '.flac'),
-    'video_extensions' : ('.mp4', '.mkv', '.MKV', '.flv', '.mpeg'),
-    'document_extensions' : ('.doc', '.pdf', '.txt'),
-    'image_extension' : ('.jpg','.jpeg','.png','.bmp')
+    'audio_extensions' : ('.mp3', '.m4a', '.wav', '.flac','mkv','.ogg','.MP3', '.WAV', '.M4A', '.FLAC' , '.AAC'),
+    'video_extensions' : ('.mp4', '.mkv', '.MKV', '.flv','.webm','.mpg','.mp2','.mpeg','.mpe','.mpv', '.m4v','.avi','.wmv','.mov','.qt', '.swf','.avchd''.WEBM','.MPG','.MP2','.MPEG','.MPE','.MPV','.M4P', '.M4V','.AVI','.WMV','.MOV','.QT','.FLV', '.SWF'
+,'.AVCHD'),
+    'document_extensions' : ('.doc', '.pdf', '.txt','.odt','.DOC', '.PDF', '.TXT','.ODT','.pptx','.docx'),
+    'image_extension' : ('.jpg','.jpeg','.png','.bmp','.JPG'),
+    'compressed_extension' : ('.zip','.rar', '.ZIP','.RAR'),
+    'exe_extension' : ('.exe', '.apk')
 }
 while True:
     folderpath = input('enter folder path : ')
@@ -33,6 +38,14 @@ for extension_type,extension_tuple in dict_extensions.items():
             else:
                 os.mkdir(folder_path)
                 shutil.move(item_path, item_new_path)
-print(f'Script Complete........\n I Hope Your Files Managed (please check your files in path: {folderpath}) \n\t\tThank you ')
-
-# Tekendra Baghele
+print('Your files moved successfully .....')
+User_Want = input(f'\nDo You want to delete all Empty Folders in / {folderpath}  (y/n) ?:  ')
+if User_Want == 'y'or User_Want == 'Y':
+    path_abs = folderpath
+    walk = list(os.walk(path_abs))
+    for path, _, _ in walk[::-1]:
+        if len(os.listdir(path)) == 0:
+            os.rmdir(path)
+            print('All process completed ...')
+else:
+    print('Empty Folders Not Removed')
